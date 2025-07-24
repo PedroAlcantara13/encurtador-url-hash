@@ -220,7 +220,7 @@ void handle_request() {
         }
     } else {
         printf("Content-Type: text/html\r\n\r\n");
-        printf("<html><body><p>Método HTTP não suportado.</p></body></html>");
+        printf("<html><body><p>Método HTTP não suportado</p></body></html>");
     }
 }
 
