@@ -136,17 +136,33 @@ void encurtarURL_CGI(const char *urlCompleta) {
     extrairPrefixo(urlCompleta, prefixo, parteLonga);
 
     char code[HASH_SIZE];
-    gerarHash(urlCompleta, code, sizeof(code));
+    char tentativa[MAX_LEN];
+    char *urlExistente;
+    int tentativas = 0;
 
-    char *urlExistente = find_url(code);
-    if (urlExistente && strcmp(urlExistente, urlCompleta) == 0) {
-        printf("Content-Type: text/html\r\n\r\n");
-        printf("<html><body>");
-        printf("<p>URL já encurtada: <a href=\"%s%s\">%s%s</a></p>", prefixo, code, prefixo, code);
-        printf("</body></html>");
-        return;
-    }
+    do {
+        if (tentativas == 0) {
+            strncpy(tentativa, urlCompleta, MAX_LEN);
+        } else {
+            snprintf(tentativa, MAX_LEN, "%s%d", urlCompleta, tentativas); // Adiciona sufixo para gerar nova hash
+        }
 
+        gerarHash(tentativa, code, sizeof(code));
+        urlExistente = find_url(code);
+
+        // Se já existe com a MESMA URL → reutiliza
+        if (urlExistente && strcmp(urlExistente, urlCompleta) == 0) {
+            printf("Content-Type: text/html\r\n\r\n");
+            printf("<html><body>");
+            printf("<p>URL já encurtada: <a href=\"%s%s\">%s%s</a></p>", prefixo, code, prefixo, code);
+            printf("</body></html>");
+            return;
+        }
+
+        tentativas++;
+    } while (urlExistente); // repete se o código já está usado por outra URL
+
+    // Salva nova URL com código exclusivo
     save_url(code, urlCompleta);
 
     printf("Content-Type: text/html\r\n\r\n");
@@ -154,6 +170,7 @@ void encurtarURL_CGI(const char *urlCompleta) {
     printf("<p>URL encurtada: <a href=\"%s%s\">%s%s</a></p>", prefixo, code, prefixo, code);
     printf("</body></html>");
 }
+
 
 // --- Redireciona para a URL original a partir do código ---
 
