@@ -10,14 +10,12 @@ O sistema recebe uma URL completa e gera uma chave curta por meio de funções d
 - Inserção de nova URL para encurtamento  
 - Geração automática da chave curta via hash  
 - Consulta de URL original a partir da chave curta  
-- [Outras funcionalidades, se houver: _preencher aqui_]
 
 ## 🛠 Tecnologias e Conceitos Utilizados
 
 - Linguagem C  
 - Estruturas de Dados (Tabelas Hash)  
 - Funções de Hash  
-- [Inserir bibliotecas externas, se usadas]
 
 ## 📂 Estrutura de Arquivos
 
@@ -69,8 +67,8 @@ gcc -o encurtador main.c hash.c -Wall
 
 Ana Jackeline Alves da Silva — Redatora
 
-Maria Vitória Fernandes Rocha — Apresentadora
-
 Marcelo Caat Amaral do Nascimento — Gitmaster
 
-Pedro Alcântara de Sousa Penaforte— Codificador
+Maria Vitória Fernandes Rocha — Apresentadora
+
+Pedro Alcântara de Sousa Penaforte — Codificador
