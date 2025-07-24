@@ -7,7 +7,7 @@
 #define MAX_LINE 1024
 #define BASE_URL "http://localhost/cgi-bin/url_shortener.cgi?code="
 #define HASH_SIZE 7
-#define MAX_LEN 256
+#define MAX_LEN 256 
 
 typedef struct {
     char chave[HASH_SIZE];
